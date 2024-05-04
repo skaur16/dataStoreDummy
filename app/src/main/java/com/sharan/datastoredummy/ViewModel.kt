@@ -13,15 +13,15 @@ class ViewModel : ViewModel() {
     var show = mutableStateOf(false)
     var get = mutableStateOf("")
 
-    fun getData(context : Context){
+    fun getData(instance: StoreData) {
         viewModelScope.launch {
-            get.value = StoreData.create(context).getData("key").toString()
+            get.value = instance.getData("key").toString()
         }
     }
 
-    fun setData(context : Context){
+    fun setData(instance : StoreData){
         viewModelScope.launch {
-            StoreData.create(context).setData("key",str.value)
+            instance.setData("key",str.value)
         }
     }
 }

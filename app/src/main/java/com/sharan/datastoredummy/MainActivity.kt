@@ -19,10 +19,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import com.sharan.datastoredummy.dataStorage.StoreData
 import com.sharan.datastoredummy.ui.theme.DataStoreDummyTheme
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +48,9 @@ class MainActivity : ComponentActivity() {
 fun Data(viewModel: ViewModel, context : Context) {
 
     val scope = rememberCoroutineScope()
+
+    val storeData = StoreData.create(context)
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -62,12 +63,13 @@ fun Data(viewModel: ViewModel, context : Context) {
                         )
 
         Button(onClick = {
-                viewModel.setData(context)
+                viewModel.setData(storeData)
         }) {
             Text(text = "Set Data")
         }
         Button(onClick = {
-                viewModel.getData(context)
+                viewModel.show.value = true
+                viewModel.getData(storeData)
         })
         {
             Text(text = "Get Data")
