@@ -68,6 +68,12 @@ fun Data(viewModel: ViewModel, context : Context) {
                 objects = viewModel.str.value
             )
 
+            viewModel.list.add(viewModel.objects.value)
+
+            viewModel.objectsList.value = viewModel.objectsList.value.copy(
+                list = viewModel.list
+            )
+
         }) {
             Text(text = "Add data")
         }
@@ -85,8 +91,10 @@ fun Data(viewModel: ViewModel, context : Context) {
             Text(text = "Get Data")
         }
         if(viewModel.show.value){
-            Text(text = viewModel.objects.value.objects)
-            Log.e("DATA",viewModel.objects.value.objects)
+            viewModel.objectsList.value.list.forEach {
+                Text(text = it.objects)
+            }
+            Log.e("DATA",viewModel.objectsList.value.list.toString())
         }
 
     }
