@@ -6,6 +6,8 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
+import com.sharan.datastoredummy.Objects
+import com.sharan.datastoredummy.ObjectsList
 import kotlinx.coroutines.flow.first
 import java.io.File
 
@@ -24,10 +26,10 @@ class StoreData(private val dataStore: DataStore<androidx.datastore.preferences.
         }
     }
 
-    suspend inline fun  getData(key : String) : String?{
+    suspend inline fun  getData(key : String) : ObjectsList? {
         val str = getSerializedData(key)
             ?: return null
-        return Gson().fromJson(str, String::class.java)
+        return Gson().fromJson(str, ObjectsList::class.java)
     }
 
     suspend inline fun <reified T> setData(key : String, value : T){

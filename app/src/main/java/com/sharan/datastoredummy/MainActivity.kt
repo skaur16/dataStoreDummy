@@ -63,6 +63,15 @@ fun Data(viewModel: ViewModel, context : Context) {
                         )
 
         Button(onClick = {
+            viewModel.objects.value = viewModel.objects.value.copy(
+                objects = viewModel.str.value
+            )
+            viewModel.list.add(viewModel.objects.value)
+        }) {
+            Text(text = "Add data")
+        }
+
+        Button(onClick = {
                 viewModel.setData(storeData)
         }) {
             Text(text = "Set Data")
