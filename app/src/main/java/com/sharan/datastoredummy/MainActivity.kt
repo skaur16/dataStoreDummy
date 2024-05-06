@@ -2,6 +2,7 @@ package com.sharan.datastoredummy
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -66,7 +67,7 @@ fun Data(viewModel: ViewModel, context : Context) {
             viewModel.objects.value = viewModel.objects.value.copy(
                 objects = viewModel.str.value
             )
-            viewModel.list.add(viewModel.objects.value)
+
         }) {
             Text(text = "Add data")
         }
@@ -84,7 +85,8 @@ fun Data(viewModel: ViewModel, context : Context) {
             Text(text = "Get Data")
         }
         if(viewModel.show.value){
-            Text(text = viewModel.get.value)
+            Text(text = viewModel.objects.value.objects)
+            Log.e("DATA",viewModel.objects.value.objects)
         }
 
     }

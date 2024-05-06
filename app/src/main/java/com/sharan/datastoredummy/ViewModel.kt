@@ -15,19 +15,24 @@ class ViewModel : ViewModel() {
     var str = mutableStateOf("")
     var show = mutableStateOf(false)
     var get = mutableStateOf("")
-    var list = mutableStateListOf<Objects>()
-    var getList = mutableStateListOf<ObjectsList>()
+
+    //var list = mutableStateListOf<Objects>()
     var objects = mutableStateOf(Objects())
+
+    var getList = mutableStateOf(ObjectsList())
     var objectsList = mutableStateOf(ObjectsList())
+
 
     fun getData(instance: StoreData) {
         viewModelScope.launch {
-             getList = instance.getData<ObjectsList>("key")!!
-    }
-
-    fun setData(instance : StoreData){
-        viewModelScope.launch {
-            instance.setData("key",list)
+            objects.value = instance.getData<Objects>("key")!!
         }
     }
+
+        fun setData(instance: StoreData) {
+            viewModelScope.launch {
+                instance.setData("key", objects.value)
+            }
+        }
+
 }
