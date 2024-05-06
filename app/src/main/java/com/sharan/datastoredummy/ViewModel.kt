@@ -22,8 +22,7 @@ class ViewModel : ViewModel() {
 
     fun getData(instance: StoreData) {
         viewModelScope.launch {
-            objectsList = instance.getData("key")!! as MutableState<ObjectsList>
-        }
+             getList = instance.getData<ObjectsList>("key")!!
     }
 
     fun setData(instance : StoreData){

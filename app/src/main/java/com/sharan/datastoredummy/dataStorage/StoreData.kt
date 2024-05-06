@@ -26,10 +26,10 @@ class StoreData(private val dataStore: DataStore<androidx.datastore.preferences.
         }
     }
 
-    suspend inline fun  getData(key : String) : ObjectsList? {
+    suspend inline fun  <reified T> getData(key : String) : T? {
         val str = getSerializedData(key)
             ?: return null
-        return Gson().fromJson(str, ObjectsList::class.java)
+        return Gson().fromJson(str, T::class.java)
     }
 
     suspend inline fun <reified T> setData(key : String, value : T){
